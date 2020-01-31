@@ -3,11 +3,8 @@
         Hello NavWorld!
     </div>
 </template>
-
 <script>
-    export default {
-        name: "NavbarComponent"
-    }
+    export default {}
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>
