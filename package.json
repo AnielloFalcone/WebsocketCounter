@@ -1,7 +1,11 @@
 {
   "name": "WebsocketCounter",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "author": {
+    "email": "aniellofalcone92@gmail.com",
+    "name": "Aniello Falcone"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -9,12 +13,10 @@
     "serve:all": "nodemon --exec 'vue-cli-service serve'"
   },
   "dependencies": {
-    "chart.js": "^2.9.3",
     "express": "^4.17.1",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
     "vue": "^2.5.17",
-    "vue-chartjs": "^3.5.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

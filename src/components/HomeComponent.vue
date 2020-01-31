@@ -1,6 +1,13 @@
 <template>
     <div id="home">
-        Hello HomeWorld! {{counter}}
+        <div class="buttons-container">
+            <button class="counter-get" v-on:click="getCounter">Get</button>
+            <button class="counter-get" v-on:click="increaseCounter">Add</button>
+            <button class="counter-stop" v-on:click="disconnectWS">Stop</button>
+        </div>
+        <div class="counter-container">
+            {{ counter }}
+        </div>
     </div>
 </template>
 <script>
@@ -10,18 +17,35 @@
     export default {
         data() {
             return {
-                counter: 0
+                counter: this.getCounter()
             };
         },
         created() {
-            this.getRealtimeData()
+            window.addEventListener('beforeunload', this.disconnectWS);
+            this.registerSocketListeners();
         },
         methods: {
-            getRealtimeData() {
-                socket.on("newcounter", newCounter => {
-                    this.counter = newCounter;
-                    console.log('Class: methods, Function: counter, Line 23 newCounter() => ', newCounter);
-                })
+            disconnectWS() {
+                socket.disconnect();
+            },
+            getCounter() {
+                this.checkConnection();
+                socket.emit('counter:actual', (counter) => {this.setCounter(counter)});
+            },
+            increaseCounter() {
+                this.checkConnection();
+                socket.emit('counter:add', (counter) => {this.setCounter(counter)});
+            },
+            checkConnection() {
+                if (socket.connected === false) {
+                    socket.open();
+                }
+            },
+            registerSocketListeners() {
+                socket.on('counter:res', counter => {this.setCounter(counter)})
+            },
+            setCounter(counter) {
+                this.counter = counter;
             }
         }
     }
