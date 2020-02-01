@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-<!--        <navbar-component></navbar-component>-->
+        <navbar-component></navbar-component>
         <transition name="fade">
             <router-view></router-view>
         </transition>
@@ -8,6 +8,12 @@
 </template>
 
 <style lang="scss">
+    @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+    body {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+    }
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s
     }

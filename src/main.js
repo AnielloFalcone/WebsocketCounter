@@ -5,6 +5,10 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 Vue.config.productionTip = false;
 
+Vue.filter('currency', function (value) {
+    return parseFloat(value).toFixed(2) + '€';
+});
+
 import HomeComponent from './components/HomeComponent.vue';
 
 const routes = [

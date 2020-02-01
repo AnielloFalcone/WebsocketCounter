@@ -1,20 +1,25 @@
 <template>
     <div id="home">
-        <div class="buttons-container">
-            <button class="counter-get" v-on:click="getCounter">Get</button>
+<!--        <div class="buttons-container">-->
+<!--            <button class="counter-get" v-on:click="getCounter">Get</button>-->
             <button class="counter-get" v-on:click="increaseCounter">Add</button>
-            <button class="counter-stop" v-on:click="disconnectWS">Stop</button>
-        </div>
-        <div class="counter-container">
-            {{ counter }}
-        </div>
+<!--            <button class="counter-stop" v-on:click="disconnectWS">Stop</button>-->
+<!--        </div>-->
+        <counter-component v-bind:counter="counter"></counter-component>
+        <list-component v-if="counter > 0" v-bind:counter="counter"></list-component>
     </div>
 </template>
+
 <script>
     import io from "socket.io-client";
+    import CounterComponent from "./CounterComponent";
     const socket = io.connect("http://localhost:4000");
 
     export default {
+        components: {
+            CounterComponent,
+            ListComponent: () => import('./ListComponent')
+        },
         data() {
             return {
                 counter: this.getCounter()
@@ -51,4 +56,15 @@
     }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+    #home {
+        display: flex;
+        flex-direction: row;
+        margin-top: 42px;
+
+        @media screen and (max-width: 576px) {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
