@@ -1,10 +1,6 @@
 <template>
     <div id="home">
-<!--        <div class="buttons-container">-->
-<!--            <button class="counter-get" v-on:click="getCounter">Get</button>-->
-            <button class="counter-get" v-on:click="increaseCounter">Add</button>
-<!--            <button class="counter-stop" v-on:click="disconnectWS">Stop</button>-->
-<!--        </div>-->
+        <button class="counter-get" v-on:click="increaseCounter">Add</button>
         <counter-component v-bind:counter="counter"></counter-component>
         <list-component v-if="counter > 0" v-bind:counter="counter"></list-component>
     </div>
@@ -13,12 +9,15 @@
 <script>
     import io from "socket.io-client";
     import CounterComponent from "./CounterComponent";
-    const socket = io.connect("http://localhost:4000");
+    import ListComponent from "./ListComponent";
+    const socket = io.connect("http://localhost:4000", {
+        transports: ["websocket", "polling"],
+    });
 
     export default {
         components: {
             CounterComponent,
-            ListComponent: () => import('./ListComponent')
+            ListComponent/*: () => import('./ListComponent')*/
         },
         data() {
             return {

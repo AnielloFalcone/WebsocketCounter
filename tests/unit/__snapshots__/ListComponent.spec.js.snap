@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListComponent.vue renders ListComponent when passed 1`] = `
+<div
+  id="list"
+>
+  <list-item-component-stub
+    order="[object Object]"
+  />
+  <list-item-component-stub
+    order="[object Object]"
+  />
+  <list-item-component-stub
+    order="[object Object]"
+  />
+  <list-item-component-stub
+    order="[object Object]"
+  />
+  <list-item-component-stub
+    order="[object Object]"
+  />
+  <list-item-component-stub
+    order="[object Object]"
+  />
+  <list-item-component-stub
+    order="[object Object]"
+  />
+</div>
+`;

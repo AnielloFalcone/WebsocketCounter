@@ -5,7 +5,9 @@ const port = 4000;
 const server = app.listen(`${port}`, () => {
     console.log(`Server started on port ${port}`);
 });
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+    transports: ["websocket", "polling"],
+});
 
 let counter = 5;
 
