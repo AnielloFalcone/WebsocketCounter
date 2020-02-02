@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="app-container">
         <navbar-component></navbar-component>
         <transition name="fade">
             <router-view></router-view>
@@ -8,6 +8,12 @@
 </template>
 
 <style lang="scss">
+    @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+    body {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+    }
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s
     }
@@ -18,10 +24,11 @@
 </style>
 
 <script>
-
     import NavbarComponent from "./components/NavbarComponent";
 
     export default {
-        components: {NavbarComponent}
-    }
+        components: {
+            NavbarComponent
+        }
+    };
 </script>

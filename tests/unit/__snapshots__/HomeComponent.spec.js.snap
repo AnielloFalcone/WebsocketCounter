@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomeComponent.vue renders HomeComponent when passed 1`] = `
+<div
+  id="home"
+>
+  <counter-component-stub />
+   
+  <!---->
+</div>
+`;

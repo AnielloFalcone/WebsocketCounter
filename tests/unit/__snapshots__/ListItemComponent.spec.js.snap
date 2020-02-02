@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListItemComponent.vue renders ListItemComponent when passed 1`] = `
+<div
+  class="list-item"
+>
+  <!---->
+   
+  <div
+    class="item-detail"
+  >
+    <div
+      class="order-number-container"
+    >
+      12
+    </div>
+     
+    <div
+      class="order-id-container"
+    >
+      1673c3a3-8777-4064-bb96-43f02c514378
+    </div>
+     
+    <div
+      class="order-amount-container"
+    >
+      123.00€
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ListItemComponent.vue should render table labels if order.number is undefined 1`] = `"received is not a function"`;

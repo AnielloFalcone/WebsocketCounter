@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CounterComponent.vue renders CounterComponent when passed 1`] = `
+<div
+  id="counter"
+>
+  <div
+    class="counter-container"
+  >
+    
+        6
+    
+  </div>
+</div>
+`;
