@@ -9,8 +9,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
-    "test:client": "jest --detectOpenHandles --forceExit",
+    "tests": "jest --detectOpenHandles --forceExit",
     "lint": "vue-cli-service lint",
     "serve:all": "nodemon --exec 'vue-cli-service serve'"
   },

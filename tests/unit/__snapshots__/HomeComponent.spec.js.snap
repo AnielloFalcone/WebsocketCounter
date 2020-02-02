@@ -4,12 +4,6 @@ exports[`HomeComponent.vue renders HomeComponent when passed 1`] = `
 <div
   id="home"
 >
-  <button
-    class="counter-get"
-  >
-    Add
-  </button>
-   
   <counter-component-stub />
    
   <!---->
