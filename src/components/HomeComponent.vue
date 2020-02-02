@@ -26,25 +26,47 @@
             };
         },
         created() {
-            window.addEventListener('beforeunload', this.disconnectWS);
             this.registerSocketListeners();
+
+            // Disconnect from WS when unloading the page to prevent multiple connection on the same page
+            window.addEventListener('beforeunload', this.disconnectWS);
         },
         methods: {
+            /**
+             * Disconnect from websocket
+             */
             disconnectWS() {
                 socket.disconnect();
             },
+
+            /**
+             * Gets the counter from the websocket
+             */
             getCounter() {
-                this.checkConnection();
+                this.maybeOpenWSConnection();
                 socket.emit('counter:get', counter => {this.setCounter(counter)});
             },
-            checkConnection() {
+
+            /**
+             * Check if the websocket connection is closed and if true opens a new one
+             */
+            maybeOpenWSConnection() {
                 if (socket.connected === false) {
                     socket.open();
                 }
             },
+
+            /**
+             * Register for listeners on websocket polls
+             */
             registerSocketListeners() {
                 socket.on('counter:update', counter => {this.setCounter(counter)})
             },
+
+            /**
+             * Set the retrieved from WS counter to the component data
+             * @param counter
+             */
             setCounter(counter) {
                 this.counter = counter;
             }
