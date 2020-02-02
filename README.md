@@ -1,18 +1,23 @@
 # WebsocketCounter
 
+## Deployed version
+```
+https://websocket-counter.herokuapp.com/
+```
+
 ## Project setup
 ```
 npm i
 ```
 
-### Compiles for development
+### Compiles and run compiled local version
 ```
-npm start 
+npm run build && npm start
 ```
 
-### Compiles and minifies for production
+### Compiles for development & hot reload
 ```
-npm run build
+npm serve 
 ```
 
 ### Run tests
