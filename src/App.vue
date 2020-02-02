@@ -1,9 +1,7 @@
 <template>
     <div class="app-container">
         <navbar-component></navbar-component>
-        <transition name="fade">
-            <router-view></router-view>
-        </transition>
+        <HomeComponent></HomeComponent>
     </div>
 </template>
 
@@ -25,9 +23,11 @@
 
 <script>
     import NavbarComponent from "./components/NavbarComponent";
+    import HomeComponent from "./components/HomeComponent";
 
     export default {
         components: {
+            HomeComponent,
             NavbarComponent
         }
     };

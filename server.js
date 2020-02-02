@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = 4000;
 const server = app.listen(`${port}`, () => {
@@ -20,7 +21,7 @@ const increaseCounter = (socket) => {
     interval = setInterval(() => {
         counter += Math.floor(Math.random() * 5) + 1;
         socket.emit('counter:update', counter);
-    }, 15 * 1000);
+    }, 5 * 1000);
 };
 
 io.on('connection', socket => {
@@ -37,6 +38,11 @@ io.on('connection', socket => {
         clearInterval(interval);
         socket.disconnect();
     });
+});
+
+app.use(express.static(__dirname + '/dist'));
+app.get('/', function(req,res) {
+    res.sendFile('index.html');
 });
 
 module.exports = app;
