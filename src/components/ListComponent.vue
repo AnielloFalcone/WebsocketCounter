@@ -18,7 +18,7 @@
             return {
                 orders: [
                     {
-                        numberLabel: '',
+                        numberLabel: 'Num',
                         idLabel: 'Order id',
                         amountLabel: 'Amount'
                     }
@@ -30,17 +30,25 @@
         },
         watch: {
             counter: {
-                handler(newCounter) {
-                    this.setOrder(newCounter).then(() => {
-                        window.scrollTo(0, document.body.scrollHeight);
-                    });
+                handler(newCounter, oldCounter) {
+                    if (newCounter - oldCounter === 1) {
+                        this.setOrder(newCounter, this.scrollToLastOrder);
+                    }
+                    else {
+                        const min = oldCounter + 1;
+                        this.createOrders(min, newCounter, this.scrollToLastOrder);
+                    }
                 }
             }
         },
         methods: {
-            createOrders() {
-                for (let i = 1; i <= this.counter; i++) {
+            createOrders(min = 1, max = this.counter, scrollCallback = undefined) {
+                for (let i = min; i <= max; i++) {
                     this.setOrder(i);
+                }
+
+                if (scrollCallback) {
+                    scrollCallback();
                 }
             },
             getUuidv4() {
@@ -48,16 +56,21 @@
                     (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
                 );
             },
-            setOrder(number) {
-                return new Promise((resolve => {
-                    this.orders.push({
-                        amount: Math.floor(Math.random() * 1000) + 1,
-                        id: this.getUuidv4(),
-                        number,
-                    });
+            setOrder(number, scrollCallback = undefined) {
+                this.orders.push({
+                    amount: Math.floor(Math.random() * 1000) + 1,
+                    id: this.getUuidv4(),
+                    number,
+                });
 
-                    resolve();
-                }));
+                if (scrollCallback) {
+                    scrollCallback();
+                }
+            },
+            scrollToLastOrder() {
+                setTimeout(() => {
+                    window.scrollTo(0, document.body.scrollHeight);
+                });
             }
         }
     }

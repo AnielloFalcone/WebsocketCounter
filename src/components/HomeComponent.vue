@@ -1,6 +1,5 @@
 <template>
     <div id="home">
-        <button class="counter-get" v-on:click="increaseCounter">Add</button>
         <counter-component v-bind:counter="counter"></counter-component>
         <list-component v-if="counter > 0" v-bind:counter="counter"></list-component>
     </div>
@@ -11,13 +10,13 @@
     import CounterComponent from "./CounterComponent";
     import ListComponent from "./ListComponent";
     const socket = io.connect("http://localhost:4000", {
-        transports: ["websocket", "polling"],
+        transports: ["polling", "websocket"],
     });
 
     export default {
         components: {
             CounterComponent,
-            ListComponent/*: () => import('./ListComponent')*/
+            ListComponent
         },
         data() {
             return {
@@ -34,11 +33,7 @@
             },
             getCounter() {
                 this.checkConnection();
-                socket.emit('counter:actual', (counter) => {this.setCounter(counter)});
-            },
-            increaseCounter() {
-                this.checkConnection();
-                socket.emit('counter:add', (counter) => {this.setCounter(counter)});
+                socket.emit('counter:get', counter => {this.setCounter(counter)});
             },
             checkConnection() {
                 if (socket.connected === false) {
@@ -46,7 +41,7 @@
                 }
             },
             registerSocketListeners() {
-                socket.on('counter:res', counter => {this.setCounter(counter)})
+                socket.on('counter:update', counter => {this.setCounter(counter)})
             },
             setCounter(counter) {
                 this.counter = counter;
